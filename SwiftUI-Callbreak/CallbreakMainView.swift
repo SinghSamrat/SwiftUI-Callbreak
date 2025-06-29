@@ -22,12 +22,9 @@ struct CallbreakMainView: View {
                     Spacer()
                     
                     HStack(spacing: 10) {
-                        //cart.fill
-                        SmallIconButtonView()
-                        // envelope.fill
-                        SmallIconButtonView()
-                        // gear.fill
-                        SmallIconButtonView()
+                        SmallIconButtonView(iconSFName: "cart.fill")
+                        SmallIconButtonView(iconSFName: "envelope.fill")
+                        SmallIconButtonView(iconSFName: "gearshape.fill")
                     }
                 }
                 .padding(.top)
@@ -35,8 +32,7 @@ struct CallbreakMainView: View {
                 Spacer()
                 
                 HStack {
-                    // chevron.right.2
-                    SmallIconButtonView()
+                    SidePanelButtonView()
                         .safeAreaPadding(35)
                     
                     Spacer()
@@ -44,20 +40,20 @@ struct CallbreakMainView: View {
                     VStack {
                         Grid(horizontalSpacing: 16, verticalSpacing: 16) {
                             GridRow {
-                                HomeScreenIconButtonView()
-                                HomeScreenIconButtonView()
+                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsBots)
+                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsHumans)
                             }
                             
                             GridRow {
-                                HomeScreenIconButtonView()
-                                HomeScreenIconButtonView()
+                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.privateTable)
+                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.lanMode)
                             }
                         }
                     }
                     
                     Spacer()
                     
-                    SmallIconButtonView()
+                    AddGemSmallIconButtonView()
                         .safeAreaPadding(35)
                 }
                 
@@ -65,11 +61,11 @@ struct CallbreakMainView: View {
                 
                 HStack {
                     // person.badge
-                    SmallIconButtonView()
+                    SmallIconButtonView(iconSFName: "person.badge.plus.fill")
                     
                     Spacer()
                     
-                    SmallIconButtonView()
+                    OtherGamesButtonView()
                 }
             }
         }
