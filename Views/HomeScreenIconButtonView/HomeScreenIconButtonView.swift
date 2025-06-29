@@ -17,11 +17,16 @@ enum HomeScreenIconButtonType: String {
 struct HomeScreenIconButtonView: View {
     var type: HomeScreenIconButtonType
     @GestureState var isPressed: Bool = false
+    let onTap: () -> Void
     
     var body: some View {
         let press = DragGesture(minimumDistance: 0)
                     .updating($isPressed) { _, state, _ in
                         state = true
+                    }
+                    .onEnded { _ in
+                        print("onTap")
+                        onTap()
                     }
         
         ZStack {
@@ -52,10 +57,9 @@ struct HomeScreenIconButtonView: View {
         .frame(width: 175, height: 100)
         .gesture(press)
         .offset(y: isPressed ? 2 : 0)
-
     }
 }
 
 #Preview {
-    HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsBots)
+    HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsBots, onTap: { })
 }

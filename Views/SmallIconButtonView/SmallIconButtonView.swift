@@ -9,13 +9,18 @@ import SwiftUI
 
 struct SmallIconButtonView: View {
     var iconSFName: String = ""
-    
     @GestureState var isPressed: Bool = false
+    
+    let onTap: () -> Void
     
     var body: some View {
         let press = DragGesture(minimumDistance: 0)
             .updating($isPressed) { _, state, _ in
                 state = true
+            }
+        
+            .onEnded { _ in
+                onTap()
             }
         
         ZStack {
@@ -36,5 +41,5 @@ struct SmallIconButtonView: View {
 }
 
 #Preview {
-    SmallIconButtonView(iconSFName: "gearshape.fill")
+    SmallIconButtonView(iconSFName: "gearshape.fill") {}
 }

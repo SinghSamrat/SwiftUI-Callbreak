@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct SidePanelButtonView: View {
+    @GestureState var isPressed: Bool = false
+    
     var body: some View {
+        let press = DragGesture(minimumDistance: 0)
+            .updating($isPressed) { _, state, _ in
+                state = true
+            }
+        
         ZStack {
             Image("SidePanelButton")
                 .resizable()
@@ -18,6 +25,8 @@ struct SidePanelButtonView: View {
                 .foregroundColor(.white)
                 .padding(.leading, 2)
         }
+        .gesture(press)
+        .offset(y: isPressed ? 2 : 0)
     }
 }
 

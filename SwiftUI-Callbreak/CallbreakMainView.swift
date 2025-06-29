@@ -7,65 +7,93 @@
 
 import SwiftUI
 
+enum HomeScreenNavigationDestination {
+    case profile
+    case store
+    case news
+    case settings
+    case othergames
+    case vsBots
+    case vsHumans
+    case privateTable
+    case lanGame
+}
+
 struct CallbreakMainView: View {
+    @State var path = NavigationPath()
+    
     var body: some View {
-        ZStack {
-            // background
-            BackgroundView()
-            
-            // buttons and ui elements
-            
-            VStack {
-                HStack {
-                    UserProfileView()
-                    
-                    Spacer()
-                    
-                    HStack(spacing: 10) {
-                        SmallIconButtonView(iconSFName: "cart.fill")
-                        SmallIconButtonView(iconSFName: "envelope.fill")
-                        SmallIconButtonView(iconSFName: "gearshape.fill")
+        NavigationStack(path: $path) {
+            ZStack {
+                // background
+                BackgroundView()
+                
+                // buttons and ui elements
+                
+                VStack {
+                    HStack {
+                        UserProfileView()
+                        
+                        Spacer()
+                        
+                        HStack(spacing: 10) {
+                            SmallIconButtonView(iconSFName: "cart.fill", onTap: {path.append(HomeScreenNavigationDestination.store)})
+                            SmallIconButtonView(iconSFName: "envelope.fill", onTap: {path.append(HomeScreenNavigationDestination.news)})
+//                                .navigationBarBackButtonHidden(true)
+                            SmallIconButtonView(iconSFName: "gearshape.fill", onTap: {path.append(HomeScreenNavigationDestination.settings)})
+                        }
                     }
-                }
-                .padding(.top)
-                
-                Spacer()
-                
-                HStack {
-                    SidePanelButtonView()
-                        .safeAreaPadding(35)
+                    .padding(.top)
                     
                     Spacer()
                     
-                    VStack {
+                    HStack {
+                        SidePanelButtonView()
+                            .safeAreaPadding(35)
+                        
+                        Spacer()
+                        
                         Grid(horizontalSpacing: 16, verticalSpacing: 16) {
                             GridRow {
-                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsBots)
-                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsHumans)
+                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsBots, onTap: {path.append(HomeScreenNavigationDestination.vsBots)})
+                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsHumans, onTap: {path.append(HomeScreenNavigationDestination.vsHumans)})
                             }
                             
                             GridRow {
-                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.privateTable)
-                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.lanMode)
+                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.privateTable, onTap: {path.append(HomeScreenNavigationDestination.privateTable)})
+                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.lanMode, onTap: {path.append(HomeScreenNavigationDestination.lanGame)})
                             }
                         }
+                        
+                        Spacer()
+                        
+                        AddGemSmallIconButtonView()
+                            .safeAreaPadding(35)
                     }
                     
                     Spacer()
                     
-                    AddGemSmallIconButtonView()
-                        .safeAreaPadding(35)
+                    HStack {
+                        // person.badge
+                        SmallIconButtonView(iconSFName: "person.badge.plus.fill", onTap: {path.append(HomeScreenNavigationDestination.store)})
+                        
+                        Spacer()
+                        
+                        OtherGamesButtonView()
+                    }
                 }
-                
-                Spacer()
-                
-                HStack {
-                    // person.badge
-                    SmallIconButtonView(iconSFName: "person.badge.plus.fill")
-                    
-                    Spacer()
-                    
-                    OtherGamesButtonView()
+            }
+            .navigationDestination(for: HomeScreenNavigationDestination.self) { type in
+                switch type {
+                case .vsBots: AnyView(EmptyView())
+                case .vsHumans: AnyView(EmptyView())
+                case .privateTable: AnyView(EmptyView())
+                case .lanGame: AnyView(EmptyView())
+                case .profile: AnyView(EmptyView())
+                case .store: AnyView(EmptyView())
+                case .news: NewsSectionView()
+                case .settings: AnyView(EmptyView())
+                case .othergames: AnyView(EmptyView())
                 }
             }
         }

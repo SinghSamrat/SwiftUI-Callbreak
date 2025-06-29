@@ -9,18 +9,22 @@
 /* Begin PBXBuildFile section */
 		991C29132E0FA9DD00C8624B /* SidePanelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C29122E0FA9DD00C8624B /* SidePanelButtonView.swift */; };
 		9941753B2E0DC01F0074FD7E /* AddGemSmallIconButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9941753A2E0DC01F0074FD7E /* AddGemSmallIconButtonView.swift */; };
+		99B4184A2E111D8B00657488 /* NewsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B418492E111D8B00657488 /* NewsSectionView.swift */; };
 		99B77F772E0C60AB003EA86F /* HomeScreenIconButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B77F762E0C60AB003EA86F /* HomeScreenIconButtonView.swift */; };
 		99B77F7D2E0C6811003EA86F /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B77F7C2E0C6811003EA86F /* UserProfileView.swift */; };
 		99C60D612E0B1F6D0032CB46 /* SmallIconButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C60D602E0B1F6D0032CB46 /* SmallIconButtonView.swift */; };
+		99DFC1462E1160FC00FE8D44 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DFC1452E1160FC00FE8D44 /* News.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		991C29122E0FA9DD00C8624B /* SidePanelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelButtonView.swift; sourceTree = "<group>"; };
 		992086F22E0B19BC00EDE3D4 /* SwiftUI-Callbreak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-Callbreak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9941753A2E0DC01F0074FD7E /* AddGemSmallIconButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGemSmallIconButtonView.swift; sourceTree = "<group>"; };
+		99B418492E111D8B00657488 /* NewsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSectionView.swift; sourceTree = "<group>"; };
 		99B77F762E0C60AB003EA86F /* HomeScreenIconButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenIconButtonView.swift; sourceTree = "<group>"; };
 		99B77F7C2E0C6811003EA86F /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		99C60D602E0B1F6D0032CB46 /* SmallIconButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallIconButtonView.swift; sourceTree = "<group>"; };
+		99DFC1452E1160FC00FE8D44 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -50,6 +54,8 @@
 		992086E92E0B19BC00EDE3D4 = {
 			isa = PBXGroup;
 			children = (
+				99DFC1452E1160FC00FE8D44 /* News.swift */,
+				99B418482E111D7400657488 /* Screens */,
 				99C60D5D2E0B1F290032CB46 /* Views */,
 				992086F42E0B19BC00EDE3D4 /* SwiftUI-Callbreak */,
 				992086F32E0B19BC00EDE3D4 /* Products */,
@@ -62,6 +68,14 @@
 				992086F22E0B19BC00EDE3D4 /* SwiftUI-Callbreak.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		99B418482E111D7400657488 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				99B418492E111D8B00657488 /* NewsSectionView.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		99B77F752E0C6089003EA86F /* HomeScreenIconButtonView */ = {
@@ -176,10 +190,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99B4184A2E111D8B00657488 /* NewsSectionView.swift in Sources */,
 				9941753B2E0DC01F0074FD7E /* AddGemSmallIconButtonView.swift in Sources */,
 				991C29132E0FA9DD00C8624B /* SidePanelButtonView.swift in Sources */,
 				99B77F7D2E0C6811003EA86F /* UserProfileView.swift in Sources */,
 				99B77F772E0C60AB003EA86F /* HomeScreenIconButtonView.swift in Sources */,
+				99DFC1462E1160FC00FE8D44 /* News.swift in Sources */,
 				99C60D612E0B1F6D0032CB46 /* SmallIconButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
