@@ -8,23 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		991C29132E0FA9DD00C8624B /* SidePanelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C29122E0FA9DD00C8624B /* SidePanelButtonView.swift */; };
+		992BEA062E1A234200DE5213 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BEA052E1A234200DE5213 /* GameScene.swift */; };
 		9941753B2E0DC01F0074FD7E /* AddGemSmallIconButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9941753A2E0DC01F0074FD7E /* AddGemSmallIconButtonView.swift */; };
-		99B4184A2E111D8B00657488 /* NewsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B418492E111D8B00657488 /* NewsSectionView.swift */; };
 		99B77F772E0C60AB003EA86F /* HomeScreenIconButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B77F762E0C60AB003EA86F /* HomeScreenIconButtonView.swift */; };
 		99B77F7D2E0C6811003EA86F /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B77F7C2E0C6811003EA86F /* UserProfileView.swift */; };
 		99C60D612E0B1F6D0032CB46 /* SmallIconButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C60D602E0B1F6D0032CB46 /* SmallIconButtonView.swift */; };
-		99DFC1462E1160FC00FE8D44 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DFC1452E1160FC00FE8D44 /* News.swift */; };
+		99EE574B2E191A150069A873 /* CardNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EE574A2E191A150069A873 /* CardNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		991C29122E0FA9DD00C8624B /* SidePanelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelButtonView.swift; sourceTree = "<group>"; };
 		992086F22E0B19BC00EDE3D4 /* SwiftUI-Callbreak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-Callbreak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		992BEA052E1A234200DE5213 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		9941753A2E0DC01F0074FD7E /* AddGemSmallIconButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGemSmallIconButtonView.swift; sourceTree = "<group>"; };
-		99B418492E111D8B00657488 /* NewsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSectionView.swift; sourceTree = "<group>"; };
 		99B77F762E0C60AB003EA86F /* HomeScreenIconButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenIconButtonView.swift; sourceTree = "<group>"; };
 		99B77F7C2E0C6811003EA86F /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		99C60D602E0B1F6D0032CB46 /* SmallIconButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallIconButtonView.swift; sourceTree = "<group>"; };
-		99DFC1452E1160FC00FE8D44 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		99EE574A2E191A150069A873 /* CardNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -36,6 +36,36 @@
 		992086F42E0B19BC00EDE3D4 /* SwiftUI-Callbreak */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "SwiftUI-Callbreak";
+			sourceTree = "<group>";
+		};
+		992BE9E42E197FE500DE5213 /* InGameHUD */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = InGameHUD;
+			sourceTree = "<group>";
+		};
+		9962EE9C2E12ECDA00FEEFE3 /* NewsSection */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = NewsSection;
+			sourceTree = "<group>";
+		};
+		9962EE9D2E12ECE900FEEFE3 /* SidePanel */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SidePanel;
+			sourceTree = "<group>";
+		};
+		99EE573D2E18DF0A0069A873 /* TinyIconButtonView */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TinyIconButtonView;
+			sourceTree = "<group>";
+		};
+		99EE57442E19115C0069A873 /* Model */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		99EE574E2E1943630069A873 /* Utils */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -54,7 +84,8 @@
 		992086E92E0B19BC00EDE3D4 = {
 			isa = PBXGroup;
 			children = (
-				99DFC1452E1160FC00FE8D44 /* News.swift */,
+				99EE574E2E1943630069A873 /* Utils */,
+				99EE57442E19115C0069A873 /* Model */,
 				99B418482E111D7400657488 /* Screens */,
 				99C60D5D2E0B1F290032CB46 /* Views */,
 				992086F42E0B19BC00EDE3D4 /* SwiftUI-Callbreak */,
@@ -73,7 +104,9 @@
 		99B418482E111D7400657488 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				99B418492E111D8B00657488 /* NewsSectionView.swift */,
+				99EE57452E19194B0069A873 /* GameScene */,
+				9962EE9D2E12ECE900FEEFE3 /* SidePanel */,
+				9962EE9C2E12ECDA00FEEFE3 /* NewsSection */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -106,13 +139,24 @@
 		99C60D5D2E0B1F290032CB46 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				992BE9E42E197FE500DE5213 /* InGameHUD */,
+				99EE573D2E18DF0A0069A873 /* TinyIconButtonView */,
 				991C291E2E10283500C8624B /* OtherGamesButtonView */,
 				99B77F7B2E0C67CE003EA86F /* UserProfile */,
 				99B77F782E0C6356003EA86F /* SmallIconButtonView */,
 				99B77F752E0C6089003EA86F /* HomeScreenIconButtonView */,
 				991C29122E0FA9DD00C8624B /* SidePanelButtonView.swift */,
+				99EE574A2E191A150069A873 /* CardNode.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		99EE57452E19194B0069A873 /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				992BEA052E1A234200DE5213 /* GameScene.swift */,
+			);
+			path = GameScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +177,12 @@
 			fileSystemSynchronizedGroups = (
 				991C291E2E10283500C8624B /* OtherGamesButtonView */,
 				992086F42E0B19BC00EDE3D4 /* SwiftUI-Callbreak */,
+				992BE9E42E197FE500DE5213 /* InGameHUD */,
+				9962EE9C2E12ECDA00FEEFE3 /* NewsSection */,
+				9962EE9D2E12ECE900FEEFE3 /* SidePanel */,
+				99EE573D2E18DF0A0069A873 /* TinyIconButtonView */,
+				99EE57442E19115C0069A873 /* Model */,
+				99EE574E2E1943630069A873 /* Utils */,
 			);
 			name = "SwiftUI-Callbreak";
 			packageProductDependencies = (
@@ -190,12 +240,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99B4184A2E111D8B00657488 /* NewsSectionView.swift in Sources */,
 				9941753B2E0DC01F0074FD7E /* AddGemSmallIconButtonView.swift in Sources */,
 				991C29132E0FA9DD00C8624B /* SidePanelButtonView.swift in Sources */,
+				992BEA062E1A234200DE5213 /* GameScene.swift in Sources */,
 				99B77F7D2E0C6811003EA86F /* UserProfileView.swift in Sources */,
 				99B77F772E0C60AB003EA86F /* HomeScreenIconButtonView.swift in Sources */,
-				99DFC1462E1160FC00FE8D44 /* News.swift in Sources */,
+				99EE574B2E191A150069A873 /* CardNode.swift in Sources */,
 				99C60D612E0B1F6D0032CB46 /* SmallIconButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
