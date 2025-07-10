@@ -21,6 +21,11 @@ enum HomeScreenNavigationDestination {
 
 struct CallbreakMainView: View {
     @State var path = NavigationPath()
+    @State var showSidePanel: Bool = false
+    
+    init() {
+        UINavigationBar.setAnimationsEnabled(false)
+    }
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -29,7 +34,6 @@ struct CallbreakMainView: View {
                 BackgroundView()
                 
                 // buttons and ui elements
-                
                 VStack {
                     HStack {
                         UserProfileView()
@@ -48,7 +52,11 @@ struct CallbreakMainView: View {
                     Spacer()
                     
                     HStack {
-                        SidePanelButtonView()
+                        SidePanelButtonView(onTap: {
+                            withAnimation(.easeInOut) {
+                                showSidePanel = true
+                            }
+                        })
                             .safeAreaPadding(35)
                         
                         Spacer()
@@ -75,17 +83,40 @@ struct CallbreakMainView: View {
                     
                     HStack {
                         // person.badge
-                        SmallIconButtonView(iconSFName: "person.badge.plus.fill", onTap: {path.append(HomeScreenNavigationDestination.store)})
+                        SmallIconButtonView(iconSFName: "person.badge.plus.fill", onTap: {
+                            withAnimation(nil) {
+                                path.append(HomeScreenNavigationDestination.store)
+                            }
+                        })
                         
                         Spacer()
                         
                         OtherGamesButtonView()
                     }
                 }
+                
+                // side panel
+                if showSidePanel {
+                    Color.black.opacity(0.4)
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            withAnimation(.easeInOut) {
+                                showSidePanel = false
+                            }
+                        }
+                    
+                    HStack {
+                        SidePanelView()
+                        Spacer()
+                    }
+                    .transition(AnyTransition.move(edge: .leading))
+                    .ignoresSafeArea()
+                }
+                
             }
             .navigationDestination(for: HomeScreenNavigationDestination.self) { type in
                 switch type {
-                case .vsBots: AnyView(EmptyView())
+                case .vsBots: GameplayView()
                 case .vsHumans: AnyView(EmptyView())
                 case .privateTable: AnyView(EmptyView())
                 case .lanGame: AnyView(EmptyView())
@@ -110,6 +141,6 @@ struct BackgroundView: View {
 }
 
 
-#Preview(traits: .landscapeRight) {
-    CallbreakMainView()
-}
+//#Preview(traits: .landscapeRight) {
+//    CallbreakMainView()
+//}
