@@ -8,6 +8,9 @@
 import SpriteKit
 import SwiftUI
 
+let CARD_Y_POSITION_NORMAL = 30
+let CARD_Y_POSITION_LEGAL = 50
+
 
 extension CGFloat {
     static func degreesToRadians(_ degrees: CGFloat) -> CGFloat {
@@ -16,21 +19,26 @@ extension CGFloat {
 }
 
 struct GameplayView: View {
-    var scene: SKScene {
-        let scene = GameScene()
-        scene.size = CGSize(width: 390, height: 844) // match device or use UIScreen.main.bounds
-        scene.scaleMode = .resizeFill
-        return scene
-    }
+    @ObservedObject var gameManager = GameManager.shared
+    @State private var scene: GameScene = GameScene()
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
+            
             SpriteView(scene: scene)
                 .ignoresSafeArea()
-                .background(Color.green)
+                .background(Color.clear)
+                .onAppear{
+                    gameManager.reset()
+                    let newScene = GameScene()
+                    newScene.size = CGSize(width: 390, height: 844)
+                    newScene.scaleMode = .resizeFill
+                    self.scene = newScene
+                }
             
             VStack {
-                BotInGameHUD() // Top
+                BotInGameHUD(name: "Bot 2", score: gameManager.playerScores[.top]!) // Top
                 Spacer()
             }
             .ignoresSafeArea()
@@ -42,13 +50,20 @@ struct GameplayView: View {
             .ignoresSafeArea()
             
             HStack {
-                BotInGameHUD() // Left
+                BotInGameHUD(name: "Bot 1", score: gameManager.playerScores[.left]!) // Left
                 Spacer()
             }
             
             HStack {
                 Spacer()
-                BotInGameHUD() // Right
+                BotInGameHUD(name: "Bot 3", score: gameManager.playerScores[.right]!) // Right
+            }
+        }
+        .overlay(alignment: .topTrailing) {
+            Button{
+                dismiss()
+            } label: {
+                Text("Exit")
             }
         }
     }
@@ -59,17 +74,37 @@ class GameScene: SKScene {
     var playedCardsThisRound: [CardNode] = []
     
     override func didMove(to view: SKView) {
+        print("didMove")
         NotificationCenter.default.addObserver(self, selector: #selector(turnChanged(_:)), name: .turnChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cardPlayed(_:)), name: .cardPlayed, object: nil)
-        backgroundColor = .blue
+        backgroundColor = .clear
+        
+        let background = SKSpriteNode(imageNamed: "theme_modern")
+        background.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        background.size = size
+        background.zPosition = -1 // behind everything else
+        addChild(background)
+        
         distributeCards()
     }
     
     @objc func cardPlayed(_ notification: Notification) {
         if let card = notification.object as? CardNode {
-            print("lastPlayedCard changed to: \(card.rank)\(card.suit)")
             lastPlayedCard = card
             playedCardsThisRound.append(card)
+            
+            if var cards = GameManager.shared.playerCards[card.owner] {
+                if let index = cards.firstIndex(of: card) {
+                    cards.remove(at: index)
+                    GameManager.shared.playerCards[card.owner] = cards
+                }
+            }
+            
+            for card_item in GameManager.shared.playerCards[.bottom]! {
+                if card_item != lastPlayedCard {
+                    card_item.animateToPosition(position: CGPoint(x: card_item.position.x, y: CGFloat(CARD_Y_POSITION_NORMAL))) // highlight legal cards
+                }
+            }
             
             if playedCardsThisRound.count == 4 {
                 removePlayedCardsAfterDelay()
@@ -82,9 +117,8 @@ class GameScene: SKScene {
     
     @objc func turnChanged(_ notification: Notification) {
         guard let player = notification.object as? PlayerPosition else { return }
-
+        
         // highlight current player, update HUD
-        print("Turn changed to: \(player)")
         
         if GameManager.shared.currentTurn != .bottom {
             run(SKAction.wait(forDuration: 0.1)) {
@@ -95,11 +129,13 @@ class GameScene: SKScene {
                     lastPlayedCard: self.lastPlayedCard
                 )
             }
+            
         } else {
             let legalCards: [CardNode] = GameManager.shared.getLegalCards(from: GameManager.shared.playerCards[.bottom]!, playedCards: self.playedCardsThisRound)
             for card in GameManager.shared.playerCards[.bottom]! {
                 if legalCards.contains(card) {
                     card.isUserInteractionEnabled = true
+                    card.animateToPosition(position: CGPoint(x: card.position.x, y: CGFloat(CARD_Y_POSITION_LEGAL))) // highlight legal cards
                 } else {
                     card.isUserInteractionEnabled = false
                 }
@@ -121,9 +157,9 @@ class GameScene: SKScene {
             guard self.playedCardsThisRound.count == 4 else { return }
             
             // 1. Determine the winning card
-            let leadSuit = self.playedCardsThisRound.first?.suit
-//            let candidates = self.playedCardsThisRound.filter { $0.suit == leadSuit }
-            let winningCard = determineRoundWinner(from: playedCardsThisRound)
+            _ = self.playedCardsThisRound.first?.suit
+            //            let candidates = self.playedCardsThisRound.filter { $0.suit == leadSuit }
+            let winningCard = determineHandWinner(from: playedCardsThisRound)
             
             guard let winner = winningCard?.owner else {
                 print("Could not determine winner.")
@@ -146,13 +182,6 @@ class GameScene: SKScene {
                 let fadeOut = SKAction.fadeOut(withDuration: 0.2)
                 let remove = SKAction.removeFromParent()
                 card.run(SKAction.sequence([moveOut, fadeOut, remove]))
-                
-                if var cards = GameManager.shared.playerCards[card.owner] {
-                    if let index = cards.firstIndex(of: card) {
-                        cards.remove(at: index)
-                        GameManager.shared.playerCards[card.owner] = cards
-                    }
-                }
             }
             
             print("Winner of hand: \(winner)")
@@ -161,33 +190,51 @@ class GameScene: SKScene {
             self.playedCardsThisRound.removeAll()
             self.lastPlayedCard = nil
             
+            print(GameManager.shared.playerCards[.left]!.isEmpty)
+            GameManager.shared.playerScores[winner, default: 0] += 1
+            if GameManager.shared.playerCards[.left]!.isEmpty {
+                let label = SKLabelNode(text: "\(determineRoundWinner()) Wins!")
+                label.fontName = "AvenirNext-Bold"
+                label.fontSize = 36
+                label.fontColor = .white
+                label.position = CGPoint(x: size.width / 2, y: size.height / 2)
+                label.zPosition = 100
+                addChild(label)
+            }
+            
             self.run(SKAction.wait(forDuration: 1.5)) {
                 GameManager.shared.currentTurn = winner
             }
         }
     }
     
-    func determineRoundWinner(from playedCards: [CardNode]) -> CardNode? {
+    func determineHandWinner(from playedCards: [CardNode]) -> CardNode? {
         func effectiveRank(_ card: CardNode) -> Int {
             return card.rank == 1 ? 14 : card.rank
         }
-
-        // 1. Check if any spades were played
+        
         let spades = playedCards.filter { $0.suit.uppercased() == "S" }
-
+        
         if !spades.isEmpty {
             return spades.max(by: { effectiveRank($0) < effectiveRank($1) })
         }
-
-        // 2. No spades → follow lead suit and pick highest
+        
         guard let leadSuit = playedCards.first?.suit.uppercased() else {
             return nil
         }
-
+        
         let sameSuit = playedCards.filter { $0.suit.uppercased() == leadSuit }
         return sameSuit.max(by: { effectiveRank($0) < effectiveRank($1) })
     }
-
+    
+    func determineRoundWinner() -> PlayerPosition {
+        if let winnerPos = GameManager.shared.playerScores.max(by: { $0.value < $1.value }) {
+            print("Winner: \(winnerPos.key) with score: \(winnerPos.value)")
+            return winnerPos.key
+        }
+        
+        return .bottom
+    }
 }
 
 class CardDistributor {
@@ -285,7 +332,7 @@ class CardDistributor {
         let spacing: CGFloat = cardWidth / 1.5
         let totalWidth = CGFloat(totalCards - 1) * spacing + cardWidth
         let startX = (scene.size.width - totalWidth) / 1.4
-        let yPosition: CGFloat = 40
+        let yPosition: CGFloat = CGFloat(CARD_Y_POSITION_NORMAL)
 
         for (index, card) in cards.enumerated() {
             let xPosition = startX + CGFloat(index) * spacing

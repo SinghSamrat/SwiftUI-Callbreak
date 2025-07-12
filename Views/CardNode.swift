@@ -161,6 +161,11 @@ class CardNode: SKSpriteNode {
 
         return SKTexture(rect: rect, in: spriteSheet)
     }
+    
+    func animateToPosition(position: CGPoint) {
+        let moveAction = SKAction.moveTo(y: CGFloat(position.y), duration: 0.3)
+        self.run(moveAction)
+    }
 
 }
 

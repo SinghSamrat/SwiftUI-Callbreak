@@ -43,6 +43,5 @@ public class CardLayoutHelper {
         cardScaleSelfTouched = cardSizeSelfTouched.width / width
         cardScaleOpponent = cardSizeOpponent.width / width
         
-        print("computeCardLayouts")
     }
 }

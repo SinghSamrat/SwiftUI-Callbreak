@@ -20,7 +20,7 @@ extension Notification.Name {
     static let cardPlayed = Notification.Name("cardPlayed")
 }
 
-class GameManager {
+class GameManager: ObservableObject {
     static let shared = GameManager()
 
     private init() {}
@@ -32,6 +32,13 @@ class GameManager {
             NotificationCenter.default.post(name: .cardPlayed, object: nil)
         }
     }
+    
+    @Published var playerScores: [PlayerPosition: Int] = [
+        .bottom: 0,
+        .right: 0,
+        .top: 0,
+        .left: 0
+    ]
 
     func advanceTurnAnticlockwise() {
         let all = PlayerPosition.allCases
@@ -96,7 +103,6 @@ class GameManager {
             return
         }
 
-        print("Selected card: \(cardToPlay.rank)\(cardToPlay.suit)")
 
         let endPosition = targetPosition(for: bot, in: scene)
         let moveAction = SKAction.move(to: endPosition, duration: 0.4)
@@ -253,6 +259,18 @@ class GameManager {
         
         return suitCards
     }
+    
+    func reset() {
+            playerScores = [
+                .bottom: 0,
+                .right: 0,
+                .top: 0,
+                .left: 0
+            ]
+            playerCards = [:]
+            currentTurn = .bottom
+            // Reset any other state variables here
+        }
 
 }
 
