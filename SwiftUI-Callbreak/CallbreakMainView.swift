@@ -34,100 +34,97 @@ struct CallbreakMainView: View {
     }
     
     var body: some View {
-        NavigationStack(path: $path) {
-            ZStack {
-                // background
-                BackgroundView()
-                
-                // buttons and ui elements
-                VStack {
-                    HStack {
-                        UserProfileView()
-                        
-                        Spacer()
-                        
-                        HStack(spacing: 10) {
-                            SmallIconButtonView(iconSFName: "cart.fill", onTap: {sceneSwitchType = .store})
-                            SmallIconButtonView(iconSFName: "envelope.fill", onTap: {sceneSwitchType = .news})
+        ZStack {
+            // background
+            BackgroundView()
+            
+            // buttons and ui elements
+            VStack {
+                HStack {
+                    UserProfileView()
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 10) {
+                        SmallIconButtonView(iconSFName: "cart.fill", onTap: {sceneSwitchType = .store})
+                        SmallIconButtonView(iconSFName: "envelope.fill", onTap: {sceneSwitchType = .news})
 //                                .navigationBarBackButtonHidden(true)
-                            SmallIconButtonView(iconSFName: "gearshape.fill", onTap: {sceneSwitchType = .settings})
-                        }
+                        SmallIconButtonView(iconSFName: "gearshape.fill", onTap: {sceneSwitchType = .settings})
                     }
-                    .padding(.top)
+                }
+                .padding(.top)
+                
+                Spacer()
+                
+                HStack {
+                    SidePanelButtonView(onTap: {
+                        withAnimation(.easeInOut) {
+                            showSidePanel = true
+                        }
+                    })
+                        .safeAreaPadding(35)
                     
                     Spacer()
                     
-                    HStack {
-                        SidePanelButtonView(onTap: {
-                            withAnimation(.easeInOut) {
-                                showSidePanel = true
-                            }
-                        })
-                            .safeAreaPadding(35)
-                        
-                        Spacer()
-                        
-                        Grid(horizontalSpacing: 16, verticalSpacing: 16) {
-                            GridRow {
-                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsBots, onTap: {sceneSwitchType = .vsBots})
-                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsHumans, onTap: {sceneSwitchType = .vsHumans})
-                            }
-                            
-                            GridRow {
-                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.privateTable, onTap: {sceneSwitchType = .privateTable})
-                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.lanMode, onTap: {sceneSwitchType = .lanGame})
-                            }
+                    Grid(horizontalSpacing: 16, verticalSpacing: 16) {
+                        GridRow {
+                            HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsBots, onTap: {sceneSwitchType = .vsBots})
+                            HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsHumans, onTap: {sceneSwitchType = .vsHumans})
                         }
                         
-                        Spacer()
-                        
-                        AddGemSmallIconButtonView()
-                            .safeAreaPadding(35)
+                        GridRow {
+                            HomeScreenIconButtonView(type: HomeScreenIconButtonType.privateTable, onTap: {sceneSwitchType = .privateTable})
+                            HomeScreenIconButtonView(type: HomeScreenIconButtonType.lanMode, onTap: {sceneSwitchType = .lanGame})
+                        }
                     }
                     
                     Spacer()
                     
-                    HStack {
-                        // person.badge
-                        SmallIconButtonView(iconSFName: "person.badge.plus.fill", onTap: {sceneSwitchType = .store})
-                        
-                        Spacer()
-                        
-                        OtherGamesButtonView()
-                    }
+                    AddGemSmallIconButtonView()
+                        .safeAreaPadding(35)
                 }
                 
-                // side panel
-                if showSidePanel {
-                    Color.black.opacity(0.4)
-                        .ignoresSafeArea()
-                        .onTapGesture {
-                            withAnimation(.easeInOut) {
-                                showSidePanel = false
-                            }
-                        }
+                Spacer()
+                
+                HStack {
+                    // person.badge
+                    SmallIconButtonView(iconSFName: "person.badge.plus.fill", onTap: {sceneSwitchType = .store})
                     
-                    HStack {
-                        SidePanelView()
-                        Spacer()
-                    }
-                    .transition(AnyTransition.move(edge: .leading))
-                    .ignoresSafeArea()
+                    Spacer()
+                    
+                    OtherGamesButtonView {sceneSwitchType = .othergames}
                 }
-                
             }
-            .fullScreenCover(item: $sceneSwitchType) { item in
-                switch item {
-                case .news: NewsSectionView()
-                case .profile: AnyView(EmptyView())
-                case .store: AnyView(EmptyView())
-                case .settings: AnyView(EmptyView())
-                case .othergames: AnyView(EmptyView())
-                case .vsBots: GameplayView()
-                case .vsHumans: AnyView(EmptyView())
-                case .privateTable: AnyView(EmptyView())
-                case .lanGame: AnyView(EmptyView())
+            
+            // side panel
+            if showSidePanel {
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation(.easeInOut) {
+                            showSidePanel = false
+                        }
+                    }
+                
+                HStack {
+                    SidePanelView()
+                    Spacer()
                 }
+                .transition(AnyTransition.move(edge: .leading))
+                .ignoresSafeArea()
+            }
+        }
+        .fullScreenCover(item: $sceneSwitchType) { item in
+            switch item {
+            case .news: NewsSectionView()
+            case .profile: AnyView(EmptyView())
+            case .store: AnyView(EmptyView())
+            case .settings: AnyView(EmptyView())
+            case .othergames: OtherGames()
+            case .vsBots: GameplayView()
+            case .vsHumans: AnyView(EmptyView())
+            case .privateTable: AnyView(EmptyView())
+            case .lanGame: AnyView(EmptyView())
             }
         }
     }
