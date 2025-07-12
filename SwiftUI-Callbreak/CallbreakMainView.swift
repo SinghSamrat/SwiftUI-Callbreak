@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum HomeScreenNavigationDestination {
+enum HomeScreenNavigationDestination: Identifiable {
     case profile
     case store
     case news
@@ -17,11 +17,17 @@ enum HomeScreenNavigationDestination {
     case vsHumans
     case privateTable
     case lanGame
+    
+    var id: Int {
+        return 1
+    }
 }
 
 struct CallbreakMainView: View {
     @State var path = NavigationPath()
     @State var showSidePanel: Bool = false
+    @State private var showGameplay = false
+    @State private var sceneSwitchType: HomeScreenNavigationDestination? = nil
     
     init() {
         UINavigationBar.setAnimationsEnabled(false)
@@ -41,10 +47,10 @@ struct CallbreakMainView: View {
                         Spacer()
                         
                         HStack(spacing: 10) {
-                            SmallIconButtonView(iconSFName: "cart.fill", onTap: {path.append(HomeScreenNavigationDestination.store)})
-                            SmallIconButtonView(iconSFName: "envelope.fill", onTap: {path.append(HomeScreenNavigationDestination.news)})
+                            SmallIconButtonView(iconSFName: "cart.fill", onTap: {sceneSwitchType = .store})
+                            SmallIconButtonView(iconSFName: "envelope.fill", onTap: {sceneSwitchType = .news})
 //                                .navigationBarBackButtonHidden(true)
-                            SmallIconButtonView(iconSFName: "gearshape.fill", onTap: {path.append(HomeScreenNavigationDestination.settings)})
+                            SmallIconButtonView(iconSFName: "gearshape.fill", onTap: {sceneSwitchType = .settings})
                         }
                     }
                     .padding(.top)
@@ -63,13 +69,13 @@ struct CallbreakMainView: View {
                         
                         Grid(horizontalSpacing: 16, verticalSpacing: 16) {
                             GridRow {
-                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsBots, onTap: {path.append(HomeScreenNavigationDestination.vsBots)})
-                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsHumans, onTap: {path.append(HomeScreenNavigationDestination.vsHumans)})
+                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsBots, onTap: {sceneSwitchType = .vsBots})
+                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.vsHumans, onTap: {sceneSwitchType = .vsHumans})
                             }
                             
                             GridRow {
-                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.privateTable, onTap: {path.append(HomeScreenNavigationDestination.privateTable)})
-                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.lanMode, onTap: {path.append(HomeScreenNavigationDestination.lanGame)})
+                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.privateTable, onTap: {sceneSwitchType = .privateTable})
+                                HomeScreenIconButtonView(type: HomeScreenIconButtonType.lanMode, onTap: {sceneSwitchType = .lanGame})
                             }
                         }
                         
@@ -83,11 +89,7 @@ struct CallbreakMainView: View {
                     
                     HStack {
                         // person.badge
-                        SmallIconButtonView(iconSFName: "person.badge.plus.fill", onTap: {
-                            withAnimation(nil) {
-                                path.append(HomeScreenNavigationDestination.store)
-                            }
-                        })
+                        SmallIconButtonView(iconSFName: "person.badge.plus.fill", onTap: {sceneSwitchType = .store})
                         
                         Spacer()
                         
@@ -114,17 +116,17 @@ struct CallbreakMainView: View {
                 }
                 
             }
-            .navigationDestination(for: HomeScreenNavigationDestination.self) { type in
-                switch type {
+            .fullScreenCover(item: $sceneSwitchType) { item in
+                switch item {
+                case .news: NewsSectionView()
+                case .profile: AnyView(EmptyView())
+                case .store: AnyView(EmptyView())
+                case .settings: AnyView(EmptyView())
+                case .othergames: AnyView(EmptyView())
                 case .vsBots: GameplayView()
                 case .vsHumans: AnyView(EmptyView())
                 case .privateTable: AnyView(EmptyView())
                 case .lanGame: AnyView(EmptyView())
-                case .profile: AnyView(EmptyView())
-                case .store: AnyView(EmptyView())
-                case .news: NewsSectionView()
-                case .settings: AnyView(EmptyView())
-                case .othergames: AnyView(EmptyView())
                 }
             }
         }
