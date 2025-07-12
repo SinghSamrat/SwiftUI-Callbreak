@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OtherGamesButtonView: View {
     @State private var scaleX = 1.0
+    var onTap: () -> Void
     
     var body: some View {
         Image("ludo_life_icon")
@@ -16,9 +17,11 @@ struct OtherGamesButtonView: View {
             .aspectRatio(contentMode: .fit)
             .frame(width: 46, height: 48)
             .scaleEffect(x: scaleX)
-        //            .animation(.linear(duration: 1).repeatForever(), value: scaleX)
             .onAppear {
                 rotateContinuously()
+            }
+            .onTapGesture {
+                onTap()
             }
     }
         
@@ -44,5 +47,5 @@ struct OtherGamesButtonView: View {
 
 
 #Preview {
-    OtherGamesButtonView()
+    OtherGamesButtonView(onTap: {})
 }
