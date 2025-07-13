@@ -45,7 +45,7 @@ struct GameplayView: View {
             
             VStack {
                 Spacer()
-                PlayerInGameHUD() // Bottom
+                PlayerInGameHUD(score: gameManager.playerScores[.bottom]!) // Bottom
             }
             .ignoresSafeArea()
             
@@ -63,6 +63,8 @@ struct GameplayView: View {
             QuitButtonView {
                 dismiss()
             }
+            .padding(.top)
+            .ignoresSafeArea()
         }
     }
 }

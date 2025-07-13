@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct PlayerInGameHUD: View {
+    var score: Int
+    
     var body: some View {
-        Image("avatar_1")
-            .resizable()
-            .frame(width: 48, height: 48)
-            .cornerRadius(.infinity)
-            .overlay(
-                Circle().stroke(Color.white, lineWidth: 2)
-            )
+        BotInGameHUD(name: "Me", score: score)
     }
 }
 
 #Preview {
-    PlayerInGameHUD()
+    PlayerInGameHUD(score: 0)
 }

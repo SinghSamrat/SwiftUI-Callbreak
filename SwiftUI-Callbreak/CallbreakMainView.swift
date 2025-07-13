@@ -117,14 +117,15 @@ struct CallbreakMainView: View {
         .fullScreenCover(item: $sceneSwitchType) { item in
             switch item {
             case .news: NewsSectionView()
-            case .profile: AnyView(EmptyView())
-            case .store: AnyView(EmptyView())
-            case .settings: AnyView(EmptyView())
+            case .profile: EmtpyScreen()
+            case .store: EmtpyScreen()
+            case .settings: EmtpyScreen()
             case .othergames: OtherGames()
-            case .vsBots: GameplayView()
-            case .vsHumans: AnyView(EmptyView())
-            case .privateTable: AnyView(EmptyView())
-            case .lanGame: AnyView(EmptyView())
+            case .vsBots: ImmersiveView(content: GameplayView())
+                    .ignoresSafeArea()
+            case .vsHumans: EmtpyScreen()
+            case .privateTable: EmtpyScreen()
+            case .lanGame: EmtpyScreen()
             }
         }
     }
@@ -138,6 +139,8 @@ struct BackgroundView: View {
             .ignoresSafeArea()
     }
 }
+
+
 
 
 //#Preview(traits: .landscapeRight) {

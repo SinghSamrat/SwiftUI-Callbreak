@@ -15,3 +15,25 @@ struct SwiftUI_CallbreakApp: App {
         }
     }
 }
+
+
+class ImmersiveHostingController<Content: View>: UIHostingController<Content> {
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+}
+
+struct ImmersiveView<Content: View>: UIViewControllerRepresentable {
+    let content: Content
+
+    func makeUIViewController(context: Context) -> ImmersiveHostingController<Content> {
+        let controller = ImmersiveHostingController(rootView: content)
+        controller.modalPresentationCapturesStatusBarAppearance = true
+        controller.modalPresentationStyle = .fullScreen
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: ImmersiveHostingController<Content>, context: Context) {
+        uiViewController.rootView = content
+    }
+}

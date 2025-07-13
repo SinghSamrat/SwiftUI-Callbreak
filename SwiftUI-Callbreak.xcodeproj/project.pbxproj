@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		991C29132E0FA9DD00C8624B /* SidePanelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C29122E0FA9DD00C8624B /* SidePanelButtonView.swift */; };
 		992BEA062E1A234200DE5213 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BEA052E1A234200DE5213 /* GameScene.swift */; };
+		9987D6A12E2381F800D58119 /* EmtpyScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9987D6A02E2381F200D58119 /* EmtpyScreen.swift */; };
 		99B77F772E0C60AB003EA86F /* HomeScreenIconButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B77F762E0C60AB003EA86F /* HomeScreenIconButtonView.swift */; };
 		99B77F7D2E0C6811003EA86F /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B77F7C2E0C6811003EA86F /* UserProfileView.swift */; };
 		99EE574B2E191A150069A873 /* CardNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EE574A2E191A150069A873 /* CardNode.swift */; };
@@ -18,6 +19,7 @@
 		991C29122E0FA9DD00C8624B /* SidePanelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelButtonView.swift; sourceTree = "<group>"; };
 		992086F22E0B19BC00EDE3D4 /* SwiftUI-Callbreak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-Callbreak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		992BEA052E1A234200DE5213 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		9987D6A02E2381F200D58119 /* EmtpyScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmtpyScreen.swift; sourceTree = "<group>"; };
 		99B77F762E0C60AB003EA86F /* HomeScreenIconButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenIconButtonView.swift; sourceTree = "<group>"; };
 		99B77F7C2E0C6811003EA86F /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		99EE574A2E191A150069A873 /* CardNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNode.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		99B418482E111D7400657488 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				9987D6A02E2381F200D58119 /* EmtpyScreen.swift */,
 				992871082E228ABD008B78AC /* OtherGames */,
 				99EE57452E19194B0069A873 /* GameScene */,
 				9962EE9D2E12ECE900FEEFE3 /* SidePanel */,
@@ -226,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9987D6A12E2381F800D58119 /* EmtpyScreen.swift in Sources */,
 				991C29132E0FA9DD00C8624B /* SidePanelButtonView.swift in Sources */,
 				992BEA062E1A234200DE5213 /* GameScene.swift in Sources */,
 				99B77F7D2E0C6811003EA86F /* UserProfileView.swift in Sources */,
