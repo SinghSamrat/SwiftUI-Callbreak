@@ -17,40 +17,37 @@ struct NewsSectionView: View {
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
             
-            HStack(alignment: .bottom, spacing: 22) {
-                NewsLargeItemScrollView()
-                
-                ScrollView {
-                    VStack(spacing: 16) {
-                        ForEach(newsItems) { item in
-                            NewsItemView(newsItem: item, onTap: {})
-                        }
-                    }
-                }
-                .frame(height: 300)
-            }
-        }
-        .toolbar {
-            ToolbarItem(placement: .principal) {
+            VStack {
                 Text("Callbreak News")
                     .font(.system(size: 20, weight: .bold, design: .rounded))
                     .foregroundColor(.white)
                     .padding(.top)
-            }
-        }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(action: {
-                    dismiss()
-                }) {
-                    Image(systemName: "xmark")
-                        .foregroundColor(.white)
-                        .fontWeight(.black)
-                        .frame(width: 30, height: 30)
+                
+                HStack(alignment: .bottom, spacing: 22) {
+                    NewsLargeItemScrollView()
+                    
+                    ScrollView {
+                        VStack(spacing: 16) {
+                            ForEach(newsItems) { item in
+                                NewsItemView(newsItem: item, onTap: {})
+                            }
+                        }
+                    }
+                    .frame(height: 300)
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
+        .overlay(alignment: .topTrailing) {
+            Button(action: {
+                dismiss()
+            }) {
+                Image(systemName: "xmark")
+                    .foregroundColor(.white)
+                    .fontWeight(.black)
+                    .frame(width: 30, height: 30)
+            }
+            .padding(.top)
+        }
     }
 }
 

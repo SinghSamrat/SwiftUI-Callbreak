@@ -29,7 +29,7 @@ class AppStoreWrapperViewController: UIViewController, SKStoreProductViewControl
     init(appID: String) {
         self.appID = appID
         super.init(nibName: nil, bundle: nil)
-        self.modalPresentationStyle = .fullScreen
+        self.modalPresentationStyle = .formSheet
     }
     
     required init?(coder: NSCoder) {

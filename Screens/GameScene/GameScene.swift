@@ -60,10 +60,8 @@ struct GameplayView: View {
             }
         }
         .overlay(alignment: .topTrailing) {
-            Button{
+            QuitButtonView {
                 dismiss()
-            } label: {
-                Text("Exit")
             }
         }
     }

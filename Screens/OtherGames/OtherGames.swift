@@ -44,6 +44,7 @@ struct OtherGames: View {
 
 struct OtherGameItemView: View {
     @State private var showAppStore = false
+    @Environment(\.openURL) var openURL
     
     var body: some View {
         VStack(spacing: 10) {
@@ -63,13 +64,12 @@ struct OtherGameItemView: View {
             
             SimpleTextButtonView(title: "INSTALL") {
                 withAnimation {
-                    showAppStore = true
+                    if let url = URL(string: "https://apps.apple.com/np/app/ludo-life/id6443580058") {
+                        openURL(url)
+                    }
                 }
             }
             .padding(.top)
-        }
-        .sheet(isPresented: $showAppStore) {
-            AppStoreView()
         }
     }
 }
