@@ -279,6 +279,7 @@ class CardDistributor {
                 card.position = dealerPoint
                 card.zPosition = 10
 //                card.setScale(1.0)
+                card.texture = CardNode.getCardBackTexture()
                 scene.addChild(card)
                 
                 GameManager.shared.playerCards[player, default: []].append(card)
@@ -344,6 +345,7 @@ class CardDistributor {
             let rotateAction = SKAction.rotate(toAngle: 0, duration: 0.2, shortestUnitArc: true)
             let showFaceAction = SKAction.run {
                 /*card.showFace()*/ // or `card.isFaceUp = true` depending on your implementation
+                card.texture = card.faceTexture
             }
 
             card.run(SKAction.sequence([moveAction, rotateAction, showFaceAction, resizeAction]))

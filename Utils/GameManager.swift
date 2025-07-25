@@ -106,30 +106,49 @@ class GameManager: ObservableObject {
 
         let endPosition = targetPosition(for: bot, in: scene)
         let moveAction = SKAction.move(to: endPosition, duration: 0.4)
-        
+
+        // Determine rotation angle based on bot seat
+        let rotationAngle: CGFloat
+        switch bot {
+        case .top:
+            rotationAngle = 0         // Facing downwards (default)
+        case .right:
+            rotationAngle = -.pi / 2  // Rotated 90° counter-clockwise
+        case .bottom:
+            rotationAngle = .pi       // Upside down
+        case .left:
+            rotationAngle = .pi / 2   // Rotated 90° clockwise
+        default:
+            rotationAngle = 0
+        }
+
+        let rotateAction = SKAction.rotate(toAngle: rotationAngle, duration: 0.4, shortestUnitArc: true)
+        let moveAndRotate = SKAction.group([moveAction, rotateAction])
+        cardToPlay.texture = cardToPlay.faceTexture
+
         let maxZ = selectedCard?.parent!.children.map { $0.zPosition }.max() ?? 0
-            
-        // Assign new card zPosition to one above max
         cardToPlay.zPosition = maxZ + 1
-        
-        cardToPlay.run(moveAction) {
+
+        cardToPlay.run(moveAndRotate) {
             NotificationCenter.default.post(name: .cardPlayed, object: cardToPlay)
         }
+
     }
     
     func targetPosition(for playerSeat: PlayerPosition, in scene: SKScene) -> CGPoint {
         let center = CGPoint(x: scene.frame.midX, y: scene.frame.midY)
-        let offset: CGFloat = 30  // how far from center you want
+        let offsetY: CGFloat = 40
+        let offsetX: CGFloat = 50
         
         switch playerSeat {
         case .bottom:
-            return CGPoint(x: center.x, y: center.y - offset)
+            return CGPoint(x: center.x, y: center.y - offsetY)
         case .left:
-            return CGPoint(x: center.x - offset, y: center.y)
+            return CGPoint(x: center.x - offsetX, y: center.y)
         case .right:
-            return CGPoint(x: center.x + offset, y: center.y)
+            return CGPoint(x: center.x + offsetX, y: center.y)
         case .top:
-            return CGPoint(x: center.x, y: center.y + offset)
+            return CGPoint(x: center.x, y: center.y + offsetY)
         default:
             return center
         }

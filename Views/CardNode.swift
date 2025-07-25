@@ -12,6 +12,7 @@ class CardNode: SKSpriteNode {
     let suit: String
     var owner: PlayerPosition
     private var originalPosition: CGPoint = .zero
+    var faceTexture: SKTexture
     
     public static private(set) var cardSizeNormal: CGSize = .zero
     public static private(set) var cardSizeThrown: CGSize = .zero
@@ -31,12 +32,12 @@ class CardNode: SKSpriteNode {
         self.owner = owner
         print("owner: ", owner)
         
-        var texture = CardNode.getCardTexture(rank: self.rank, suit: self.suit.first ?? "S");
+        faceTexture = CardNode.getCardTexture(rank: self.rank, suit: self.suit.first ?? "S");
         if rank == 0 && suit == "b" {
-            texture = CardNode.getCardBackTexture()
+            faceTexture = CardNode.getCardBackTexture()
         }
         
-        super.init(texture: texture, color: .clear, size: CGSize(width: 191, height: 262))
+        super.init(texture: faceTexture, color: .clear, size: CGSize(width: 191, height: 262))
         
         if self.owner != .bottom {
             self.isUserInteractionEnabled = false
@@ -44,7 +45,7 @@ class CardNode: SKSpriteNode {
             self.isUserInteractionEnabled = true
         }
             
-        let original = texture.size()
+        let original = faceTexture.size()
         let width = original.width
         let height = original.height
         
@@ -93,7 +94,7 @@ class CardNode: SKSpriteNode {
         
         let thresholdY: CGFloat = 100
         if location.y > thresholdY {
-            let centerPoint = CGPoint(x: parent.frame.midX, y: parent.frame.midY)
+            let centerPoint = CGPoint(x: parent.frame.midX, y: parent.frame.midY - 30)
             let moveToCenter = SKAction.move(to: centerPoint, duration: 0.3)
             self.run(moveToCenter)
             self.size = CardNode.cardSizeThrown
