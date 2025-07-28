@@ -24,9 +24,7 @@ enum HomeScreenNavigationDestination: Identifiable {
 }
 
 struct CallbreakMainView: View {
-    @State var path = NavigationPath()
     @State var showSidePanel: Bool = false
-    @State private var showGameplay = false
     @State private var sceneSwitchType: HomeScreenNavigationDestination? = nil
     @State private var showGemPopup: Bool = false
     

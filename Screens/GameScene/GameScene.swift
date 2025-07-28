@@ -25,7 +25,6 @@ struct GameplayView: View {
 
     var body: some View {
         ZStack {
-            
             SpriteView(scene: scene)
                 .ignoresSafeArea()
                 .background(Color.clear)
@@ -41,7 +40,6 @@ struct GameplayView: View {
                 BotInGameHUD(name: "Bot 2", score: gameManager.playerScores[.top]!) // Top
                 Spacer()
             }
-            .ignoresSafeArea()
             
             VStack {
                 Spacer()
@@ -52,20 +50,17 @@ struct GameplayView: View {
             HStack {
                 BotInGameHUD(name: "Bot 1", score: gameManager.playerScores[.left]!) // Left
                 Spacer()
-            }
-            
-            HStack {
-                Spacer()
                 BotInGameHUD(name: "Bot 3", score: gameManager.playerScores[.right]!) // Right
             }
+            .safeAreaPadding(.all, 50)
         }
         .overlay(alignment: .topTrailing) {
             QuitButtonView {
                 dismiss()
             }
-            .padding(.top)
-            .ignoresSafeArea()
+            .padding()
         }
+        .ignoresSafeArea()
     }
 }
 

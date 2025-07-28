@@ -17,10 +17,8 @@ class NetworkMonitor: ObservableObject {
         monitor.pathUpdateHandler = { [weak self] path in
             DispatchQueue.main.async {
                 if path.status == .satisfied {
-                    print("Internet connection is available.")
                     self?.isWifiAvailable = true
                 } else {
-                    print("Internet connection is not available.")
                     self?.isWifiAvailable = false
                 }
             }
