@@ -9,11 +9,15 @@ import SwiftUI
 
 struct AddGemSmallIconButtonView: View {
     @GestureState var isPressed: Bool = false
+    var onTap: () -> Void
     
     var body: some View {
         let press = DragGesture(minimumDistance: 0)
             .updating($isPressed) { _, state, _ in
                 state = true
+            }
+            .onEnded() { _ in
+                onTap()
             }
         
         ZStack {
@@ -60,5 +64,5 @@ struct AddGemSmallIconButtonView: View {
 }
 
 #Preview {
-    AddGemSmallIconButtonView()
+//    AddGemSmallIconButtonView()
 }
