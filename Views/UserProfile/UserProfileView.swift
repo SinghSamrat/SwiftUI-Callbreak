@@ -62,10 +62,12 @@ struct UserProfileView: View {
 }
 
 struct UsernameAndFlagView: View {
+    @StateObject private var nwmonitor = NetworkMonitor()
+    
     var body: some View {
         HStack(spacing: 2) {
             Circle()
-                .fill(.green)
+                .fill(nwmonitor.isWifiAvailable ? .green : .white)
                 .frame(width: 6, height: 6)
             
             Text("myusername")

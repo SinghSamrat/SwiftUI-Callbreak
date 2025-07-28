@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import SpriteKit
 
 
 struct EarnGemView: View {
+    @Binding var isShowing: Bool
+    
     var body: some View {
         ZStack {
             Color(.black)
@@ -31,7 +34,9 @@ struct EarnGemView: View {
                             .frame(height: 106)
                     }
                     
-                    IconImageandTextButtonView() {}
+                    IconImageandTextButtonView() {
+                        print("IconImageandTextButtonView pressed")
+                    }
                         .padding(.bottom, 20)
                 }
             }
@@ -39,9 +44,17 @@ struct EarnGemView: View {
             .frame(width: 204, height: 240, alignment: .center)
             .padding()
         }
+        .overlay(alignment: .topTrailing) {
+            QuitButtonView {
+                isShowing = false
+            }
+            .padding()
+        }
+        .ignoresSafeArea()
+        .background(Color.clear)
     }
 }
 
 #Preview(traits: .landscapeRight) {
-    EarnGemView()
+    EarnGemView(isShowing: .constant(false))
 }

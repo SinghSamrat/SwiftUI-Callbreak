@@ -118,7 +118,7 @@ struct CallbreakMainView: View {
             }
             
             if showGemPopup {
-                EarnGemView()
+                EarnGemView(isShowing: $showGemPopup)
                     .transition(.scale)
                     .zIndex(1)
             }
