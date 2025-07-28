@@ -29,6 +29,11 @@
 			path = EmptyScreen;
 			sourceTree = "<group>";
 		};
+		991336AF2E362FB40032425D /* EarnGem */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = EarnGem;
+			sourceTree = "<group>";
+		};
 		992086F42E0B19BC00EDE3D4 /* SwiftUI-Callbreak */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "SwiftUI-Callbreak";
@@ -133,6 +138,7 @@
 		99C60D5D2E0B1F290032CB46 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				991336AF2E362FB40032425D /* EarnGem */,
 				9928710C2E228D8B008B78AC /* Buttons */,
 				992BE9E42E197FE500DE5213 /* InGameHUD */,
 				99B77F7B2E0C67CE003EA86F /* UserProfile */,
@@ -168,6 +174,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				991336AB2E33E16C0032425D /* EmptyScreen */,
+				991336AF2E362FB40032425D /* EarnGem */,
 				992086F42E0B19BC00EDE3D4 /* SwiftUI-Callbreak */,
 				992871082E228ABD008B78AC /* OtherGames */,
 				9928710C2E228D8B008B78AC /* Buttons */,

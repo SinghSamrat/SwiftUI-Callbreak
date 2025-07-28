@@ -28,6 +28,7 @@ struct CallbreakMainView: View {
     @State var showSidePanel: Bool = false
     @State private var showGameplay = false
     @State private var sceneSwitchType: HomeScreenNavigationDestination? = nil
+    @State private var showGemPopup: Bool = false
     
     init() {
         UINavigationBar.setAnimationsEnabled(false)
@@ -80,7 +81,9 @@ struct CallbreakMainView: View {
                     
                     Spacer()
                     
-                    AddGemSmallIconButtonView()
+                    AddGemSmallIconButtonView() {
+                        showGemPopup = true
+                    }
                         .safeAreaPadding(35)
                 }
                 
@@ -113,7 +116,14 @@ struct CallbreakMainView: View {
                 .transition(AnyTransition.move(edge: .leading))
                 .ignoresSafeArea()
             }
+            
+            if showGemPopup {
+                EarnGemView()
+                    .transition(.scale)
+                    .zIndex(1)
+            }
         }
+//        .animation(.easeInOut, value: showGemPopup)
         .fullScreenCover(item: $sceneSwitchType) { item in
             switch item {
             case .news: NewsSectionView()
@@ -143,6 +153,6 @@ struct BackgroundView: View {
 
 
 
-//#Preview(traits: .landscapeRight) {
-//    CallbreakMainView()
-//}
+#Preview(traits: .landscapeRight) {
+    CallbreakMainView()
+}
