@@ -34,7 +34,7 @@ struct EarnGemView: View {
                             .frame(height: 106)
                     }
                     
-                    IconImageandTextButtonView() {
+                    IconImageandTextButtonView(title: "Get 4", iconLeft: "play.rectangle.fill", imageRight: "gem") {
                         print("IconImageandTextButtonView pressed")
                     }
                         .padding(.bottom, 20)

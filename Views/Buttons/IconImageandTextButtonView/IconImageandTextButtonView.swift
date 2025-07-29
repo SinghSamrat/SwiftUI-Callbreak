@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct IconImageandTextButtonView: View {
-    var title: String = "GET 4"
+    var title: String
+    var iconLeft: String
+    var imageRight: String
     @GestureState var isPressed: Bool = false
     
     var onTap: () -> Void
@@ -23,14 +25,14 @@ struct IconImageandTextButtonView: View {
             }
         
         HStack {
-            Image(systemName: "play.rectangle.fill")
+            Image(systemName: iconLeft)
                 .resizable()
                 .foregroundColor(.white)
                 .frame(width: 20, height: 15)
             Text(title)
                 .foregroundColor(.white)
                 .font(.system(size: 12, weight: .bold))
-            Image("gem")
+            Image(imageRight)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 16)
@@ -50,5 +52,5 @@ struct IconImageandTextButtonView: View {
 }
 
 #Preview {
-    IconImageandTextButtonView(onTap: {})
+    IconImageandTextButtonView(title: "Get 4", iconLeft: "", imageRight: "") {}
 }
