@@ -164,6 +164,9 @@ struct PlayLocallyTabView: View {
             }
             .padding()
             
+            LanGameItemView()
+            VSeparator()
+            
             Spacer()
             
             ZStack() {
@@ -175,6 +178,50 @@ struct PlayLocallyTabView: View {
             }
             .frame(height: 40)
         }
+    }
+}
+
+struct LanGameItemView: View {
+    var body: some View {
+        HStack {
+            Image("arun")
+                .resizable()
+                .frame(width: 42, height: 42)
+                .cornerRadius(.infinity)
+                .overlay(
+                    Circle().stroke(Color.white, lineWidth: 2)
+                )
+            
+            VStack(alignment: .leading, spacing: 1) {
+                HStack(spacing: 2) {
+                    Text("ArunTeslatech")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.black)
+                    
+                    Image("nepal")
+                        .resizable()
+                        .frame(width: 13, height: 9)
+                }
+                
+                Text("[1/4]")
+                    .font(.system(size: 10, weight: .light))
+                    .foregroundColor(.black)
+            }
+            
+            Spacer()
+            
+            ZStack {
+                Rectangle()
+                    .foregroundColor(.red)
+                    .frame(width: 50, height: 20)
+                
+                Text("CANCEL")
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundColor(.white)
+            }
+        }
+        .padding(.trailing)
+        .padding(.leading)
     }
 }
 
