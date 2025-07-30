@@ -22,6 +22,8 @@ struct NewsItem: Identifiable {
 }
 
 struct MockNewsItems {
+    static let sampleNews = NewsItem(id: 1, type: NewsType.event.rawValue, title: "Anniversary Card Sets", date: "4th Nov", imageName: "anniversary")
+    
     static let newsItems: [NewsItem] = [
         NewsItem(id: 1, type: NewsType.event.rawValue, title: "Anniversary Card Sets", date: "4th Nov", imageName: "anniversary"),
         NewsItem(id: 2, type: NewsType.event.rawValue, title: "New Avatars", date: "5th Nov", imageName: "newavatars"),

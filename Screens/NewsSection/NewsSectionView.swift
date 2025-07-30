@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct NewsSectionView: View {
-    @State var newsItems: [NewsItem] = MockNewsItems.newsItems
-    @State var isNewsItemSelected: Bool = false
-    @State var selectedItem: NewsItem = MockNewsItems.newsItems[0]
+//    @State var newsItems: [NewsItem] = MockNewsItems.newsItems
+    @StateObject var viewModel: NewsSectionViewModel = NewsSectionViewModel()
+    
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -26,18 +26,18 @@ struct NewsSectionView: View {
                     .padding(.top)
                 
                 HStack(alignment: .bottom, spacing: 22) {
-                    if isNewsItemSelected {
-                        SelectedNewsItemView(selectedItem: selectedItem)
+                    if viewModel.isNewsItemSelected {
+                        SelectedNewsItemView(selectedItem: viewModel.selectedItem ?? MockNewsItems.sampleNews)
                     } else {
                         NewsLargeItemScrollView()
                         
                         ScrollView {
                             VStack(spacing: 16) {
-                                ForEach(newsItems) { item in
+                                ForEach(MockNewsItems.newsItems) { item in
                                     NewsItemView(newsItem: item) {
                                         
-                                        selectedItem = item
-                                        isNewsItemSelected = true
+                                        viewModel.selectedItem = item
+                                        viewModel.isNewsItemSelected = true
                                     }
                                 }
                             }
@@ -62,7 +62,7 @@ struct NewsSectionView: View {
         }
         .overlay(alignment: .topLeading) {
             Button(action: {
-                isNewsItemSelected = false
+                viewModel.isNewsItemSelected = false
             }) {
                 Image(systemName: "arrowshape.backward.fill")
                     .foregroundColor(.white)
@@ -70,7 +70,7 @@ struct NewsSectionView: View {
                     .frame(width: 50, height: 30)
             }
             .padding(.top)
-            .opacity(isNewsItemSelected ? 1.0 : 0.0)
+            .opacity(viewModel.isNewsItemSelected ? 1.0 : 0.0)
         }
     }
 }
