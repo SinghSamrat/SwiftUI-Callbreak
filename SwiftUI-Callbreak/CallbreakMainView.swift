@@ -42,6 +42,8 @@ struct CallbreakMainView: View {
                 HStack {
                     UserProfileView() {
                         sceneSwitchType = .profile
+                    } onEarnGemsTap: {
+                        showGemPopup = true
                     }
                     
                     Spacer()

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UserProfileView: View {
     var onTap: () -> Void
+    var onEarnGemsTap: () -> Void
     
     var body: some View {
         ZStack {
@@ -57,7 +58,9 @@ struct UserProfileView: View {
             }
         }
         .frame(width: 176, height: 48)
-        .overlay(UserProfileAddGemButtonView(),
+        .overlay(UserProfileAddGemButtonView() {
+            onEarnGemsTap()
+        },
                  alignment: .bottomTrailing)
         .onTapGesture {
             onTap()
@@ -88,6 +91,7 @@ struct UsernameAndFlagView: View {
 }
 
 struct UserProfileAddGemButtonView: View {
+    var onEarnGemsTap: () -> Void
     var body: some View {
         Image("gem")
             .resizable()
@@ -103,10 +107,18 @@ struct UserProfileAddGemButtonView: View {
                     .shadow(radius: 1, x: 0, y: 1)
                     .padding(.trailing, 8),
                 alignment: .bottomTrailing)
+            .onTapGesture {
+                onEarnGemsTap()
+            }
     }
 }
 
 
 #Preview {
-    UserProfileView() {}
+    UserProfileView {
+        
+    } onEarnGemsTap: {
+        
+    }
+
 }
