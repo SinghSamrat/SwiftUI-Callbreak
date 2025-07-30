@@ -11,9 +11,12 @@ struct EmtpyScreen: View {
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         ZStack{
-            Color("bg_yellow")
+            Image("arun")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
                 .ignoresSafeArea()
-            Text("Empty Screen")
+            Text("Nothing to see here!")
+            
         }
         .overlay(alignment: .topTrailing) {
             QuitButtonView {

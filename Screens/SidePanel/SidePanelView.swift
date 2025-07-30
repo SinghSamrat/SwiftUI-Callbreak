@@ -165,6 +165,8 @@ struct PlayLocallyTabView: View {
             .padding()
             
             LanGameItemView()
+                .safeAreaPadding(.leading, 40)
+            
             VSeparator()
             
             Spacer()
