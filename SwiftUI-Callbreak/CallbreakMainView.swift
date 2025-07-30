@@ -127,7 +127,7 @@ struct CallbreakMainView: View {
             case .news: NewsSectionView()
             case .profile: EmtpyScreen()
             case .store: EmtpyScreen()
-            case .settings: EmtpyScreen()
+            case .settings: SettingsScreenView()
             case .othergames: OtherGames()
             case .vsBots: ImmersiveView(content: GameplayView())
                     .ignoresSafeArea()

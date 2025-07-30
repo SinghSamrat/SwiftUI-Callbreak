@@ -52,6 +52,11 @@
 			path = InGameHUD;
 			sourceTree = "<group>";
 		};
+		994457822E3A7FAF002C4789 /* Settings */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		9962EE9C2E12ECDA00FEEFE3 /* NewsSection */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = NewsSection;
@@ -108,6 +113,7 @@
 		99B418482E111D7400657488 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				994457822E3A7FAF002C4789 /* Settings */,
 				991336AB2E33E16C0032425D /* EmptyScreen */,
 				992871082E228ABD008B78AC /* OtherGames */,
 				99EE57452E19194B0069A873 /* GameScene */,
@@ -176,6 +182,7 @@
 				992871082E228ABD008B78AC /* OtherGames */,
 				9928710C2E228D8B008B78AC /* Buttons */,
 				992BE9E42E197FE500DE5213 /* InGameHUD */,
+				994457822E3A7FAF002C4789 /* Settings */,
 				9962EE9C2E12ECDA00FEEFE3 /* NewsSection */,
 				9962EE9D2E12ECE900FEEFE3 /* SidePanel */,
 				99EE57442E19115C0069A873 /* Model */,
