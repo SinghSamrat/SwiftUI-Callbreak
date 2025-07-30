@@ -12,19 +12,15 @@ struct EmtpyScreen: View {
     var body: some View {
         ZStack{
             Color("bg_yellow")
+                .ignoresSafeArea()
             Text("Empty Screen")
         }
-        .ignoresSafeArea()
         .overlay(alignment: .topTrailing) {
-            Button(action: {
+            QuitButtonView {
                 dismiss()
-            }) {
-                Image(systemName: "xmark")
-                    .foregroundColor(.white)
-                    .fontWeight(.black)
-                    .frame(width: 30, height: 30)
             }
-            .padding(.top)
+            .padding()
         }
+        .ignoresSafeArea()
     }
 }

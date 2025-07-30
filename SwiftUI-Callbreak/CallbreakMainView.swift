@@ -40,7 +40,9 @@ struct CallbreakMainView: View {
             // buttons and ui elements
             VStack {
                 HStack {
-                    UserProfileView()
+                    UserProfileView() {
+                        sceneSwitchType = .profile
+                    }
                     
                     Spacer()
                     
@@ -131,9 +133,12 @@ struct CallbreakMainView: View {
             case .othergames: OtherGames()
             case .vsBots: ImmersiveView(content: GameplayView())
                     .ignoresSafeArea()
-            case .vsHumans: EmtpyScreen()
-            case .privateTable: EmtpyScreen()
-            case .lanGame: EmtpyScreen()
+            case .vsHumans: ImmersiveView(content: GameplayView())
+                    .ignoresSafeArea()
+            case .privateTable: ImmersiveView(content: GameplayView())
+                    .ignoresSafeArea()
+            case .lanGame: ImmersiveView(content: GameplayView())
+                    .ignoresSafeArea()
             }
         }
     }

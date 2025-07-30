@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct UserProfileView: View {
+    var onTap: () -> Void
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -57,6 +59,9 @@ struct UserProfileView: View {
         .frame(width: 176, height: 48)
         .overlay(UserProfileAddGemButtonView(),
                  alignment: .bottomTrailing)
+        .onTapGesture {
+            onTap()
+        }
         
     }
 }
@@ -103,5 +108,5 @@ struct UserProfileAddGemButtonView: View {
 
 
 #Preview {
-    UserProfileView()
+    UserProfileView() {}
 }

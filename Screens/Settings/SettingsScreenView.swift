@@ -316,11 +316,13 @@ struct SettingsTabButtonsView: View {
         .font(.system(size: 10, weight: .bold))
         .foregroundColor(.black)
         .frame(height: 34)
-        .cornerRadius(4)
-        .border(Color(.black), width: 1)
+        .overlay(
+            RoundedRectangle(cornerRadius: 3)
+                .stroke(Color.black, lineWidth: 1)
+        )
     }
 }
 
 #Preview(traits: .landscapeRight) {
-    infoIconandTitleHStack(title: "")
+    SettingsTabButtonsView(tabButtonTitles: ["Analog", "Both", "Digital"])
 }

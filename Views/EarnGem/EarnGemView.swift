@@ -26,7 +26,7 @@ struct EarnGemView: View {
                     ZStack {
                         Image("gem_highlight")
                             .resizable()
-                            .frame(width: 204, height: 176)
+                            .frame(width: 204, height: 172)
                         
                         Image("gem")
                             .resizable()
@@ -40,8 +40,11 @@ struct EarnGemView: View {
                         .padding(.bottom, 20)
                 }
             }
-            .border(.red, width: 2)
             .frame(width: 204, height: 240, alignment: .center)
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.red, lineWidth: 2)
+            )
             .padding()
         }
         .overlay(alignment: .topTrailing) {
