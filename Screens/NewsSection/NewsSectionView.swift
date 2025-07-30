@@ -9,6 +9,8 @@ import SwiftUI
 
 struct NewsSectionView: View {
     @State var newsItems: [NewsItem] = MockNewsItems.newsItems
+    @State var isNewsItemSelected: Bool = false
+    @State var selectedItem: NewsItem = MockNewsItems.newsItems[0]
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -24,18 +26,28 @@ struct NewsSectionView: View {
                     .padding(.top)
                 
                 HStack(alignment: .bottom, spacing: 22) {
-                    NewsLargeItemScrollView()
-                    
-                    ScrollView {
-                        VStack(spacing: 16) {
-                            ForEach(newsItems) { item in
-                                NewsItemView(newsItem: item, onTap: {})
+                    if isNewsItemSelected {
+                        SelectedNewsItemView(selectedItem: selectedItem)
+                    } else {
+                        NewsLargeItemScrollView()
+                        
+                        ScrollView {
+                            VStack(spacing: 16) {
+                                ForEach(newsItems) { item in
+                                    NewsItemView(newsItem: item) {
+                                        
+                                        selectedItem = item
+                                        isNewsItemSelected = true
+                                    }
+                                }
                             }
                         }
+                        .frame(height: 300)
                     }
-                    .frame(height: 300)
                 }
             }
+            
+            
         }
         .overlay(alignment: .topTrailing) {
             Button(action: {
@@ -47,6 +59,18 @@ struct NewsSectionView: View {
                     .frame(width: 30, height: 30)
             }
             .padding(.top)
+        }
+        .overlay(alignment: .topLeading) {
+            Button(action: {
+                isNewsItemSelected = false
+            }) {
+                Image(systemName: "arrowshape.backward.fill")
+                    .foregroundColor(.white)
+                    .fontWeight(.black)
+                    .frame(width: 50, height: 30)
+            }
+            .padding(.top)
+            .opacity(isNewsItemSelected ? 1.0 : 0.0)
         }
     }
 }
@@ -62,7 +86,7 @@ struct NewsItemView: View {
                 state = true
                 }
                 .onEnded { _ in
-                    
+                    onTap()
                 }
         
         ZStack(alignment: .leading) {
@@ -123,6 +147,33 @@ struct NewsLargeItemScrollView: View {
     }
 }
 
+struct SelectedNewsItemView: View {
+    var selectedItem: NewsItem
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            Rectangle()
+                .foregroundColor(Color("news_item"))
+                .frame(height: 300)
+                .cornerRadius(8)
+            
+            ScrollView {
+                VStack {
+                    Image(selectedItem.imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 260)
+                        .cornerRadius(8)
+                        .padding()
+                    
+                    Text(selectedItem.title)
+                        .font(.system(size: 20, weight: .bold, design: .default))
+                }
+            }
+        }
+        .frame(height: 300)
+    }
+}
+
 #Preview(traits: .landscapeRight) {
-    NewsLargeItemScrollView()
+    NewsSectionView()
 }

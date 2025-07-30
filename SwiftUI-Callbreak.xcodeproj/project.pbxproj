@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		991C29132E0FA9DD00C8624B /* SidePanelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C29122E0FA9DD00C8624B /* SidePanelButtonView.swift */; };
 		992BEA062E1A234200DE5213 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BEA052E1A234200DE5213 /* GameScene.swift */; };
 		99B77F772E0C60AB003EA86F /* HomeScreenIconButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B77F762E0C60AB003EA86F /* HomeScreenIconButtonView.swift */; };
 		99B77F7D2E0C6811003EA86F /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B77F7C2E0C6811003EA86F /* UserProfileView.swift */; };
@@ -15,7 +14,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		991C29122E0FA9DD00C8624B /* SidePanelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelButtonView.swift; sourceTree = "<group>"; };
 		992086F22E0B19BC00EDE3D4 /* SwiftUI-Callbreak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-Callbreak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		992BEA052E1A234200DE5213 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		99B77F762E0C60AB003EA86F /* HomeScreenIconButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenIconButtonView.swift; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 				992BE9E42E197FE500DE5213 /* InGameHUD */,
 				99B77F7B2E0C67CE003EA86F /* UserProfile */,
 				99B77F752E0C6089003EA86F /* HomeScreenIconButtonView */,
-				991C29122E0FA9DD00C8624B /* SidePanelButtonView.swift */,
 				99EE574A2E191A150069A873 /* CardNode.swift */,
 			);
 			path = Views;
@@ -240,7 +237,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				991C29132E0FA9DD00C8624B /* SidePanelButtonView.swift in Sources */,
 				992BEA062E1A234200DE5213 /* GameScene.swift in Sources */,
 				99B77F7D2E0C6811003EA86F /* UserProfileView.swift in Sources */,
 				99B77F772E0C60AB003EA86F /* HomeScreenIconButtonView.swift in Sources */,
