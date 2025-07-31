@@ -83,7 +83,7 @@ struct NewsItemView: View {
     var body: some View {
         let press = DragGesture(minimumDistance: 0)
                 .updating($isPressed) { _, state, _ in
-                state = true
+                    state = true
                 }
                 .onEnded { _ in
                     onTap()

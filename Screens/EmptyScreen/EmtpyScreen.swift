@@ -16,8 +16,10 @@ struct EmtpyScreen: View {
                 .aspectRatio(contentMode: .fit)
                 .ignoresSafeArea()
             Text("Nothing to see here!")
-            
+                .font(.system(size: 24))
+                .fontWeight(.bold)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .overlay(alignment: .topTrailing) {
             QuitButtonView {
                 dismiss()
