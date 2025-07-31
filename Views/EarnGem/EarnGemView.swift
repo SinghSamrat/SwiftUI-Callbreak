@@ -38,8 +38,8 @@ struct EarnGemView: View {
                         }
                         
                         IconImageandTextButtonView(title: "Get 4", iconLeft: "play.rectangle.fill", imageRight: "gem") {
-                            print("IconImageandTextButtonView pressed")
                             isRewardedAdShowing = true
+                            RewardHelper.shared.gemCount += 4
                         }
                             .padding(.bottom, 20)
                     }

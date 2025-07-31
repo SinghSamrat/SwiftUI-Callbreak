@@ -46,7 +46,7 @@ struct UserProfileView: View {
                             .frame(width: 104, height: 20)
                             .cornerRadius(4)
                         
-                        Text("100")
+                        Text("\(RewardHelper.shared.gemCount)")
                             .font(.system(size: 12))
                             .fontWeight(.medium)
                             .foregroundColor(.white)
