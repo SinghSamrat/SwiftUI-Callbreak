@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsScreenView: View {
     @Environment(\.dismiss) private var dismiss
+    @StateObject var settingsViewModel: SettingsViewModel = SettingsViewModel()
     
     var body: some View {
         ZStack {
@@ -47,17 +48,17 @@ struct SettingsScreenView: View {
                 HStack(spacing: 10) {
                     VStack(spacing: 10) {
                         LanguageSettingsButtonView(title: "Language (Beta)")
-                        SoundSettingsItemView(title: "Sound | Music")
-                        SettingsItemView(title: "Auto throw card")
-                        SettingsItemView(title: "Highlight valid card")
+                        SoundSettingsItemView(title: "Sound | Music", soundOn: $settingsViewModel.isSoundOn, musicOn: $settingsViewModel.isMusicOn)
+                        SettingsItemView(title: "Auto throw card", state: $settingsViewModel.isAutoThrow)
+                        SettingsItemView(title: "Highlight valid card", state: $settingsViewModel.isHighlightValidCard)
                         GameSpeedSettingsItem(title: "Game play speed")
                     }
                     
                     VStack(spacing: 10) {
                         ThemeSettingsButtonView(title: "Appearance")
-                        SettingsItemView(title: "Show mini scorecards")
-                        SettingsItemView(title: "Suggest Bid")
-                        SettingsItemView(title: "Push notifications")
+                        SettingsItemView(title: "Show mini scorecards", state: $settingsViewModel.isShowMiniScorecard)
+                        SettingsItemView(title: "Suggest Bid", state: $settingsViewModel.isSuggestBid)
+                        SettingsItemView(title: "Push notifications", state: $settingsViewModel.isPushNotification)
                         TimerSettingsItem(title: "Timer")
                     }
                 }
@@ -224,8 +225,8 @@ struct LanguageSettingsButtonView: View {
 struct SoundSettingsItemView: View {
     var title: String
     
-    @State private var soundOn = true
-    @State private var musicOn = true
+    @Binding var soundOn: Bool
+    @Binding var musicOn: Bool
     
     var body: some View {
         ZStack {
@@ -262,8 +263,7 @@ struct SoundSettingsItemView: View {
 
 struct SettingsItemView: View {
     var title: String
-    
-    @State private var state = true
+    @Binding var state: Bool
     
     var body: some View {
         ZStack {
@@ -275,7 +275,9 @@ struct SettingsItemView: View {
                 title,
                 systemImage: "info.circle",
                 isOn: $state
-            )
+            ) .onTapGesture {
+                state.toggle()
+            }
             .font(.system(size: 14, weight: .bold))
             .foregroundColor(.black)
             .tint(Color("top_menu"))
