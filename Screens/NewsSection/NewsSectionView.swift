@@ -85,8 +85,11 @@ struct NewsItemView: View {
                 .updating($isPressed) { _, state, _ in
                     state = true
                 }
-                .onEnded { _ in
-                    onTap()
+                .onEnded { value in
+                    let movement = hypot(value.translation.width, value.translation.height)
+                    if movement < 10 {
+                        onTap()
+                    }
                 }
         
         ZStack(alignment: .leading) {
