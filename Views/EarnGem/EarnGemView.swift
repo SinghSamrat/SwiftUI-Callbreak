@@ -109,6 +109,7 @@ struct LoadingBarView: View {
 
 struct RewardedAdView: View {
     var rewardedAdDismissed: () -> Void
+    @State private var showCloseButton = false
     var body: some View {
         ZStack{
             Rectangle()
@@ -129,24 +130,30 @@ struct RewardedAdView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .overlay(alignment: .topTrailing) {
-            HStack {
-                Text("Reward Granted")
-                    .font(.system(size: 10, weight: .medium))
-                    .foregroundColor(.white)
-                    .frame(width: 100, height: 30)
-                    .background(Color.gray)
-                    .cornerRadius(5)
+            if showCloseButton {
+                HStack {
+                    Text("Reward Granted")
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundColor(.white)
+                        .frame(width: 100, height: 30)
+                        .background(Color.gray)
+                        .cornerRadius(5)
 
-                Image(systemName: "xmark.circle.fill")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(.gray)
-                    .padding()
-                    .onTapGesture {
-                        rewardedAdDismissed()
-                    }
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(.gray)
+                        .padding()
+                        .onTapGesture {
+                            rewardedAdDismissed()
+                        }
+                }
+            }  
+        }
+        .onAppear() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                showCloseButton = true
             }
-            
         }
         
         .ignoresSafeArea()

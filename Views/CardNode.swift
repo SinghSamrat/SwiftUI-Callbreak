@@ -148,7 +148,7 @@ class CardNode: SKSpriteNode {
         let rows = 5
 
         let column = 0 // 1st card in the row
-        let row = 4    // 5th row (0-indexed)
+        let row = 4    
 
         let frameWidth = 1.0 / CGFloat(columns)
         let frameHeight = 1.0 / CGFloat(rows)

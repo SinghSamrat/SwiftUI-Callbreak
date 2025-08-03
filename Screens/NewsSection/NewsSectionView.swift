@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NewsSectionView: View {
-//    @State var newsItems: [NewsItem] = MockNewsItems.newsItems
+//    @State var newsItems: [NewsItem] = MockNewsItems.newsItemsw
     @StateObject var viewModel: NewsSectionViewModel = NewsSectionViewModel()
     
     @Environment(\.dismiss) private var dismiss

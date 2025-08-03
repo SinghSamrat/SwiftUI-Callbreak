@@ -11,7 +11,7 @@ struct EmtpyScreen: View {
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         ZStack{
-            Image("arun")
+            Image("theme_modern")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .ignoresSafeArea()
